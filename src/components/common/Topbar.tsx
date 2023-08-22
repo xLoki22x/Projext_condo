@@ -1,9 +1,34 @@
 import { AppBar, Button, Toolbar, Typography } from "@mui/material";
 import colorConfigs from "../../configs/colorConfigs";
 import sizeConfigs from "../../configs/sizeConfigs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2'
 
 const Topbar = () => {
+
+
+  const navigate = useNavigate();
+
+  function Back() {
+
+    Swal.fire({
+      icon: "warning",
+      title: "แจ้งเตือน",
+      text: "Are you sure?",
+      confirmButtonText: "ตกลง",
+    }).then((e: any) => {
+      if (e.isConfirmed) {
+        sessionStorage.clear()
+        navigate('/', { replace: true })
+        //window.location.href = "/";
+      }
+    })
+  }
+
+
+
+
+
   return (
     <AppBar
       position="fixed"
@@ -20,16 +45,17 @@ const Topbar = () => {
           Rocket
         </Typography>
         <Typography variant="h6">
-          <Link to='/' style={{ color: 'white' }}>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2, color: 'white' }}
-            >
-              Exit
-            </Button>
-          </Link>
+
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2, color: 'white' }}
+            onClick={() => { Back() }}
+          >
+            Exit
+          </Button>
+
         </Typography>
       </Toolbar>
 

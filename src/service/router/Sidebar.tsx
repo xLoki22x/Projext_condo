@@ -11,18 +11,8 @@ const Sidebar = () => {
     setOpen(!open);
   };
 
-  const Back = () => {
-    Swal.fire({
-      text: 'OK '
-    }).then((e: any) => {
-      if (e.isConfirmed) {
-        navigate('/', { replace: true })
-        sessionStorage.clear()
-      }
-    })
-  }
 
-  const navigate = useNavigate();
+ 
 
   return (
     <Drawer variant="permanent" sx={{ width: 400 }}>
@@ -47,11 +37,11 @@ const Sidebar = () => {
               <ListItemIcon>
                 <Mail />
               </ListItemIcon>
-              <Button onClick={() => Back()}>
-                <Link to={'/root/dashbord'}>
-                  <ListItemText primary="Submenu Item 2" />
-                </Link>
-              </Button>
+
+              <Link to={'/root/dashbord'}>
+                <ListItemText primary="Submenu Item 2" />
+              </Link>
+
             </ListItem>
           </List>
         </Collapse>

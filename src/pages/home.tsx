@@ -16,12 +16,13 @@ function Home() {
 
     const Login = () => {
         Swal.fire({
-            text: 'Are you suea?'
+            icon: "warning",
+            title: "แจ้งเตือน",
+            text: 'Are you sure?',
+            confirmButtonText: "ตกลง",
         }).then((e: any) => {
             if (e.isConfirmed) {
-                sessionStorage.setItem('id', 'userid')
-                sessionStorage.setItem('pass', 'password')
-                window.location.href = '/root'
+                window.location.href = "/root";
             }
         })
     }
@@ -34,7 +35,8 @@ function Home() {
                 <Typography component="h1" variant="h5">
                     Sign In
                 </Typography>
-                <form onClick={() => { Login() }}>
+
+                <form>
                     <TextField
                         margin="normal"
                         required
@@ -55,19 +57,22 @@ function Home() {
                         id="password"
                         autoComplete="current-password"
                     />
-                    <Link to='root' style={{ color: 'white' }}>
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2, color: 'white' }}
-                        >
-                            Sign In
-                        </Button>
-                    </Link>
+
+
+                    <Button
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2, color: 'white' }}
+                        onClick={() => { Login() }}
+                    >
+                        Sign In
+                    </Button>
+
                 </form>
+
             </Paper>
         </Container>
+
     );
 }
 

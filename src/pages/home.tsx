@@ -10,8 +10,22 @@ import {
     CssBaseline,
 } from '@mui/material';
 import { Lock } from '@mui/icons-material';
+import Swal from 'sweetalert2'
 
 function Home() {
+
+    const Login = () => {
+        Swal.fire({
+            text: 'Are you suea?'
+        }).then((e: any) => {
+            if (e.isConfirmed) {
+                sessionStorage.setItem('id', 'userid')
+                sessionStorage.setItem('pass', 'password')
+                window.location.href = '/root'
+            }
+        })
+    }
+
     return (
         <Container component="main" maxWidth="xs" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
             <CssBaseline />
@@ -20,7 +34,7 @@ function Home() {
                 <Typography component="h1" variant="h5">
                     Sign In
                 </Typography>
-                <form>
+                <form onClick={() => { Login() }}>
                     <TextField
                         margin="normal"
                         required

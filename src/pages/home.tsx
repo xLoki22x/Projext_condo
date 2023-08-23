@@ -1,6 +1,6 @@
 
 import { Outlet, Link } from 'react-router-dom';
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Container,
     Paper,
@@ -9,22 +9,41 @@ import {
     Typography,
     CssBaseline,
 } from '@mui/material';
-import { Lock } from '@mui/icons-material';
+import { Lock, Password } from '@mui/icons-material';
 import Swal from 'sweetalert2'
 
 function Home() {
 
+    const [userid, setuserid] = React.useState("");
+    const [pass, setpassword] = React.useState("");
+
     const Login = () => {
-        Swal.fire({
-            icon: "warning",
-            title: "แจ้งเตือน",
-            text: 'Are you sure?',
-            confirmButtonText: "ตกลง",
-        }).then((e: any) => {
-            if (e.isConfirmed) {
-                window.location.href = "/root";
-            }
-        })
+
+        console.log(userid);
+        console.log(pass);
+
+        if ((userid == '' || undefined || null) && (pass == '' || undefined || null)) {
+
+            Swal.fire('error', 'add your userid and pass ', 'error')
+
+        }
+        else {
+            Swal.fire({
+                icon: "warning",
+                title: "Login",
+                text: 'Are you sure?',
+                confirmButtonText: "Sure",
+                cancelButtonText: 'No',
+                cancelButtonColor: 'red',
+                showCancelButton: true,
+            }).then((e: any) => {
+                if (e.isConfirmed) {
+                    window.location.href = "/root";
+                    sessionStorage.setItem('userid', 'toey')
+                    sessionStorage.setItem('password', '1234')
+                }
+            })
+        }
     }
 
     return (
@@ -44,6 +63,7 @@ function Home() {
                         id="email"
                         label="Email Address"
                         name="email"
+                        onChange={(e: any) => { setuserid(e.target.value) }}
                         autoComplete="email"
                         autoFocus
                     />
@@ -54,6 +74,7 @@ function Home() {
                         name="password"
                         label="Password"
                         type="password"
+                        onChange={(e: any) => { setpassword(e.target.value) }}
                         id="password"
                         autoComplete="current-password"
                     />

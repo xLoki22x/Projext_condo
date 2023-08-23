@@ -3,19 +3,30 @@ import colorConfigs from "../../configs/colorConfigs";
 import sizeConfigs from "../../configs/sizeConfigs";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
+import { useEffect, useState } from "react";
 
 const Topbar = () => {
 
+  useEffect(() => {
+
+    setuserid(sessionStorage.getItem('userid') as any)
+
+  }, [])
 
   const navigate = useNavigate();
+
+  const [userid, setuserid] = useState("");
 
   function Back() {
 
     Swal.fire({
       icon: "warning",
-      title: "แจ้งเตือน",
-      text: "Are you sure?",
-      confirmButtonText: "ตกลง",
+      title: "Exit",
+      text: "Are you sure Exit?",
+      showCancelButton: true,
+      cancelButtonText: 'No',
+      cancelButtonColor: 'red',
+      confirmButtonText: "Sure",
     }).then((e: any) => {
       if (e.isConfirmed) {
         sessionStorage.clear()
@@ -44,17 +55,21 @@ const Topbar = () => {
         <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: '30px' }}>
           Rocket
         </Typography>
+        <p style={{ fontSize: '15px' }}><span style={{fontWeight:'bold'}}>Welcome user:</span>{userid}</p>
         <Typography variant="h6">
+
+
 
           <Button
             type="submit"
-            fullWidth
+
             variant="contained"
-            sx={{ mt: 3, mb: 2, color: 'white' }}
+            sx={{ mt: 3, mb: 2, color: 'white', bgcolor: "red" }}
             onClick={() => { Back() }}
           >
             Exit
           </Button>
+
 
         </Typography>
       </Toolbar>
